@@ -1,13 +1,23 @@
 import React from 'react'
-import Register from './AuthenticationFlow'
+
+import Authentication from './Authentication';
+
+import useAuth from '../hooks/useAuth';
 
 const AuthRouter : React.FC = () => {
 
-    const isAuthenticated = false
+    const {
+        isSignedIn,
+        signUp,
+        signIn,
+    } = useAuth();
 
-    if(!isAuthenticated){
+    if(!isSignedIn){
         return (
-            <Register />
+            <Authentication 
+                signUp={signUp}
+                signIn={signIn}
+            />
         )
     }
 
