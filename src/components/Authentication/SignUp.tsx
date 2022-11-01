@@ -35,6 +35,8 @@ const SignUp : React.FC<Props> = ({ signUp }) => {
       </Text>
       <Input
         placeholder='Email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <Input
         placeholder='Phone Number'
@@ -42,6 +44,8 @@ const SignUp : React.FC<Props> = ({ signUp }) => {
       <Input
         placeholder='SSN'
         type='password'
+        value={ssn}
+        onChange={(e) => setSsn(e.target.value)}
       />
       <Input
         placeholder='Date of Birth'

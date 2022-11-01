@@ -3,8 +3,9 @@ import React from 'react'
 import Authentication from './Authentication';
 
 import useAuth from '../hooks/useAuth';
+import Home from './Home';
 
-const AuthRouter : React.FC = () => {
+const Router : React.FC = () => {
 
     const {
         isSignedIn,
@@ -22,8 +23,8 @@ const AuthRouter : React.FC = () => {
     }
 
     return (
-        null
+        <Home />
     )
 }
 
-export default AuthRouter
+export default Router

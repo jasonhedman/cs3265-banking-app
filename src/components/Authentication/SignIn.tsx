@@ -32,6 +32,8 @@ const SignIn : React.FC<Props> = ({ signIn }) => {
         </Text>
         <Input
             placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
         />
         <Button
             colorScheme='blue'

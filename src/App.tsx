@@ -2,13 +2,13 @@ import React from 'react';
 
 import { ChakraProvider } from '@chakra-ui/react'
 import Layout from './components/Layout';
-import AuthRouter from './components/AuthRouter';
+import Router from './components/Router';
 
-function App() {
+const App : React.FC = () => {
   return (
     <ChakraProvider>
       <Layout>
-        <AuthRouter />
+        <Router />
       </Layout>
     </ChakraProvider>
   );
