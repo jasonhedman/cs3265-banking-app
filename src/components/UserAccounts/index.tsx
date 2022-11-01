@@ -1,15 +1,19 @@
 import React from 'react'
 
-import { Text, VStack } from '@chakra-ui/react';
+import { HStack, Text, VStack } from '@chakra-ui/react';
 
 import Card from '../utilities/Card';
 import Account from './Account';
+import CreateAccount from './CreateAccount';
 
 import useAccounts from '../../hooks/useAccounts';
 
+
+const userId = "1"
+
 const UserAccounts : React.FC = () => {
 
-    const { userAccounts } = useAccounts("1");
+    const { userAccounts } = useAccounts(userId);
 
     return (
         <Card>
@@ -30,6 +34,14 @@ const UserAccounts : React.FC = () => {
                         />
                     ))
                 }
+                <HStack
+                    w='100%'
+                    justifyContent='center'
+                >
+                    <CreateAccount 
+                        userId={userId}
+                    />
+                </HStack>
             </VStack>
         </Card>
     )

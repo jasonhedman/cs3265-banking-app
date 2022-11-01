@@ -13,6 +13,7 @@ const Layout : React.FC<Props> = ({ children }) => {
         flexDirection='column'
         justifyContent='center'
         bg='gray.50'
+        py={16}
     >
         <Container
             h='100%'

@@ -13,7 +13,7 @@ import { Bank } from '../../types/bank'
 
 interface Props {
     banks: Bank[]
-    selectedBank: Bank
+    selectedBank: Bank | null
     selectBank: (bank: Bank) => void
 }
 
@@ -21,7 +21,7 @@ const SelectBank : React.FC<Props> = ({ banks, selectedBank, selectBank }) => {
   return (
     <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            {selectedBank.bankName}
+            {selectedBank?.bankName || 'Select Bank'}
         </MenuButton>
         <MenuList>
             {
