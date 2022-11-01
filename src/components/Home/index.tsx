@@ -8,12 +8,14 @@ import {
 
 import Banks from '../Banks'
 import UserAccounts from '../UserAccounts'
+import UserLoans from '../UserLoans'
 
 const Home : React.FC = () => {
   return (
     <VStack>
         <Header />
         <UserAccounts />
+        <UserLoans />
         <Banks />
     </VStack>
     
