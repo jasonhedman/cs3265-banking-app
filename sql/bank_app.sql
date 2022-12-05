@@ -182,18 +182,19 @@ insert into Payment values (9, 8, 1000);
 
 -- Create User given email, phone number, SSN, date of birth, and phone numbers)
 insert into User values (6, 'jason@hedmans.org', '123456789', '2002-07-09');
+insert into UserPhoneNumber values (6, '1234567890');
 -- Get user given email-address
-SELECT * FROM User WHERE Email = 'jason@hedmans.org'
+SELECT * FROM User WHERE Email = 'jason@hedmans.org';
 -- Create account for UserId given bank and branch
 insert into Account values (9, 1, 6, '2018-01-01', 1000);
 insert into Account values (10, 2, 6, '2018-01-02', 2000);
 -- get accounts given UserId
-SELECT * FROM Account WHERE UserID = 6
+SELECT * FROM Account WHERE UserID = 6;
 -- create loan for account
 Insert into Loan values (10, 10000, 0.05, '2023-01-01', 9);
 Insert into Loan values (11, 20000, 0.05, '2023-01-02', 10);
 -- get loans given UserId
-SELECT * FROM Loan WHERE AccountID IN (SELECT AccountID FROM Account WHERE UserID = 6)
+SELECT * FROM Loan WHERE AccountID IN (SELECT AccountID FROM Account WHERE UserID = 6);
 -- repay loan given LoanId
 Insert into Payment values (10, 10, 1000);
 Insert into Payment values (11, 10, 1000);
