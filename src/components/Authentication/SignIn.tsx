@@ -9,10 +9,11 @@ import {
 import useSignIn from '../../hooks/useSignIn';
 
 interface Props {
-    signIn: (email: string) => void
+    signIn: (email: string) => void,
+    isError: boolean
 }
 
-const SignIn : React.FC<Props> = ({ signIn }) => {
+const SignIn : React.FC<Props> = ({ signIn, isError }) => {
 
     const {
         email,
@@ -34,6 +35,7 @@ const SignIn : React.FC<Props> = ({ signIn }) => {
             placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            isInvalid={isError}
         />
         <Button
             colorScheme='blue'

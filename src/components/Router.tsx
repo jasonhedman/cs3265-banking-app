@@ -9,6 +9,7 @@ const Router : React.FC = () => {
 
     const {
         isSignedIn,
+        isSignInError,
         signUp,
         signIn,
     } = useAuth();
@@ -18,6 +19,7 @@ const Router : React.FC = () => {
             <Authentication 
                 signUp={signUp}
                 signIn={signIn}
+                isError={isSignInError}
             />
         )
     }

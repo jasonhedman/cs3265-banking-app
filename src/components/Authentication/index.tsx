@@ -9,10 +9,11 @@ import SignUp from './SignUp';
 
 interface Props {
   signIn: (email: string) => void
-  signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => void
+  signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => void,
+  isError: boolean
 }
 
-const Authentication : React.FC<Props> = ({ signIn, signUp }) => {
+const Authentication : React.FC<Props> = ({ signIn, signUp, isError }) => {
 
   const [isSignIn, setIsSignIn] = React.useState(true);
 
@@ -25,6 +26,7 @@ const Authentication : React.FC<Props> = ({ signIn, signUp }) => {
           isSignIn ? (
             <SignIn 
               signIn={signIn}
+              isError={isError}
             />
           ) : (
             <SignUp
