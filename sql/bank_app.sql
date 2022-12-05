@@ -81,3 +81,15 @@ Insert into BankBranch Values (02, '638, Voss, Houston, TX', 'Chase');
 Select Fname, Lname
 From Employee
 where EmployeeType = 'Teller' and Salary > 37500;
+
+-- Operations needed:
+
+-- Create User given email, phone number, SSN, date of birth
+-- Get user given email-address
+-- Create account for UserId given bank and branch
+-- get accounts given UserId
+-- get loans given UserId
+-- create loan for account
+-- repay loan given LoanId
+-- get banks by branch
+-- get employees by branch
