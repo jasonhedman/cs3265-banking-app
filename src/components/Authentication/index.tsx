@@ -9,7 +9,7 @@ import SignUp from './SignUp';
 
 interface Props {
   signIn: (email: string) => void
-  signUp: (email: string, ssn: string) => void
+  signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => void
 }
 
 const Authentication : React.FC<Props> = ({ signIn, signUp }) => {

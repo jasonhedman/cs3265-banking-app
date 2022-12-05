@@ -10,7 +10,7 @@ import {
 import useSignUp from '../../hooks/useSignUp';
 
 interface Props {
-  signUp: (email: string, ssn: string) => void
+  signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => void
 }
 
 const SignUp : React.FC<Props> = ({ signUp }) => {
@@ -20,6 +20,10 @@ const SignUp : React.FC<Props> = ({ signUp }) => {
     setEmail,
     ssn,
     setSsn,
+    dateOfBirth,
+    setDateOfBirth,
+    phoneNumber,
+    setPhoneNumber,
   } = useSignUp();
 
   return (
@@ -40,6 +44,8 @@ const SignUp : React.FC<Props> = ({ signUp }) => {
       />
       <Input
         placeholder='Phone Number'
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
       />
       <Input
         placeholder='SSN'
@@ -49,10 +55,12 @@ const SignUp : React.FC<Props> = ({ signUp }) => {
       />
       <Input
         placeholder='Date of Birth'
+        value={dateOfBirth}
+        onChange={(e) => setDateOfBirth(e.target.value)}
       />
       <Button
         colorScheme='blue'
-        onClick={() => signUp(email, ssn)}
+        onClick={() => signUp(email, ssn, dateOfBirth, phoneNumber)}
       >
         Create Account
       </Button>

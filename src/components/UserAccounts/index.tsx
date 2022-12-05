@@ -27,12 +27,18 @@ const UserAccounts : React.FC = () => {
                     Your Accounts
                 </Text>
                 {
-                    userAccounts.map((account) => (
-                        <Account 
-                            key={account.accountId}
-                            account={account}
-                        />
-                    ))
+                    userAccounts.length > 0 ? (
+                        userAccounts.map((account) => (
+                            <Account 
+                                key={account.accountId}
+                                account={account}
+                            />
+                        ))
+                    ) : (
+                        <Text>
+                            You don't have any accounts yet.
+                        </Text>
+                    )
                 }
                 <HStack
                     w='100%'
