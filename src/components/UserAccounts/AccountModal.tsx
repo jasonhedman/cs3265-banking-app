@@ -34,7 +34,9 @@ const AccountModal : React.FC<Props> = ({ isAccountModalOpen, closeModal, accoun
             <ModalCloseButton />
             <ModalBody>
                 <Tabs>
-                    <TabList>
+                    <TabList
+                        justifyContent='center'
+                    >
                         <Tab>Deposit/Withdraw</Tab>
                         <Tab>Take Loan</Tab>
                     </TabList>
