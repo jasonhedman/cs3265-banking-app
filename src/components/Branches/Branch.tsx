@@ -4,11 +4,11 @@ import {
     Box, Text
 } from '@chakra-ui/react'
 
-import { Branch } from '../../types/branches'
+import { BranchData } from '../../types/branches'
 
 interface Props {
-    branch: Branch
-    openBranchModal: (branch: Branch) => void
+    branch: BranchData
+    openBranchModal: (branch: BranchData) => void
 }
 
 const BranchComponent : React.FC<Props> = ({ branch, openBranchModal }) => {
@@ -28,10 +28,10 @@ const BranchComponent : React.FC<Props> = ({ branch, openBranchModal }) => {
         <Text
             fontWeight='bold'
         >
-            {branch.branchName}
+            {branch.bankName} {branch.branchName}
         </Text>
         <Text>
-            {branch.branchAddress}
+            {branch.address}
         </Text>
     </Box>
   )

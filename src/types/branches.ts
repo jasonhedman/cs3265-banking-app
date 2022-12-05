@@ -1,7 +1,10 @@
 export interface Branch {
-    bankId: string;
-    bankName: string;
-    branchId: string;
+    branchID: string;
+    bankID: string;
     branchName: string;
-    branchAddress: string;
+    address: string;
+}
+
+export interface BranchData extends Branch {
+    bankName: string;
 }

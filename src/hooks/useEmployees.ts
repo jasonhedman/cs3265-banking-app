@@ -1,15 +1,15 @@
 import React from "react"
 
-import { employees as employeeData } from "../data/employees";
+import { getEmployeesByBranchID } from "../data/employees";
 
 import { Employee } from "../types/employee";
 
-const useEmployees = () => {
+const useEmployees = (branchId: string) => {
     const [employees, setEmployees] = React.useState<Employee[]>([])
 
     React.useEffect(() => {
-        setEmployees(employeeData);
-    }, [])
+        setEmployees(getEmployeesByBranchID(branchId))
+    }, [branchId])
 
     return {
         employees,

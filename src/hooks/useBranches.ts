@@ -1,17 +1,17 @@
 import React from "react";
 
-import { branches as branchData } from "../data/branches";
+import { getBranchesDataByBankID } from "../data/branches";
 
 import { Bank } from "../types/bank";
-import { Branch } from "../types/branches";
+import { BranchData } from "../types/branches";
 
 const useBranches = (bank: Bank) => {
 
-    const [branches, setBranches] = React.useState<Branch[]>([]);
+    const [branches, setBranches] = React.useState<BranchData[]>([]);
 
     React.useEffect(() => {
-        setBranches(branchData);
-    }, [])
+        setBranches(getBranchesDataByBankID(bank.bankID));
+    }, [bank])
 
     return {
         branches

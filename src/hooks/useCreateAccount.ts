@@ -1,27 +1,33 @@
 import React from 'react'
 
-import { branches as branchesData } from '../data/branches'
+import { BranchData } from '../types/branches'
+import useAccounts from './useAccounts';
+import useBanks from './useBanks';
+import useBranches from './useBranches';
 
-import { Branch } from '../types/branches'
+const useCreateAccount = () => {
 
-const useCreateAccount = (userId: string) => {
+    const { addAccount } = useAccounts();
 
-    const [branches, setBranches] = React.useState<Branch[]>([])
-    const [selectedBranch, setSelectedBranch] = React.useState<Branch | null>(null)
 
-    React.useEffect(() => {
-        setBranches(branchesData);
-    }, [])
+    const { banks, selectedBank, selectBank} = useBanks();
+    const { branches } = useBranches(selectedBank);
 
-    const selectBranch = (branch: Branch) => {
+    // const [branches, setBranches] = React.useState<Branch[]>([])
+    const [selectedBranch, setSelectedBranch] = React.useState<BranchData>(branches[0])
+
+    const selectBranch = (branch: BranchData) => {
         setSelectedBranch(branch)
     }
 
     const createAccount = () => {
-
-    }
+        addAccount(selectedBranch.branchID)
+    }   
 
     return {
+        banks,
+        selectedBank,
+        selectBank,
         branches,
         selectedBranch,
         selectBranch,

@@ -8,12 +8,12 @@ import {
     ModalBody,
     ModalCloseButton,
 } from '@chakra-ui/react'
-import { Branch } from '../../types/branches'
+import { BranchData } from '../../types/branches'
 import Employees from './Employees'
 
 interface Props {
     isBranchModalOpen: boolean,
-    selectedBranch: Branch | null,
+    selectedBranch: BranchData | null,
     closeModal: () => void
 }
 
@@ -30,7 +30,9 @@ const BranchModal : React.FC<Props> = ({ isBranchModalOpen, selectedBranch, clos
                     <ModalHeader>{selectedBranch.branchName}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Employees />
+                        <Employees 
+                            branchId={selectedBranch.branchID}
+                        />
                     </ModalBody>
                 </ModalContent>
             )

@@ -1,7 +1,15 @@
+export interface UserPhoneNumber {
+    userID: string,
+    phoneNumber: string
+}
+
 export interface User {
-    userId: string;
-    email: string;
-    ssn: string;
-    dateOfBirth: string;
-    phoneNumber: string;
+    userID: string,
+    email: string,
+    ssn: string, 
+    dateOfBirth: string
+}
+
+export interface UserData extends User {
+    phoneNumbers: string[]
 }

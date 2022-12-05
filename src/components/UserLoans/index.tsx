@@ -2,32 +2,38 @@ import React from 'react'
 
 import Card from '../utilities/Card';
 
-import { VStack, Text } from '@chakra-ui/react';
+import { VStack, Text, HStack } from '@chakra-ui/react';
 
 import useLoans from '../../hooks/useLoans';
 import Loan from './Loan';
 
-const userId = "1"
-
 const UserLoans : React.FC = () => {
 
-    const { loans } = useLoans(userId);
+    const { loans } = useLoans();
 
     return (
         <Card>
             <VStack
                 alignItems='flex-start'
             >
-                <Text
-                    fontSize='xl'
-                    fontWeight='bold'
+                <HStack
+                    justifyContent='space-between'
+                    w='100%'
                 >
-                    Your Loans
-                </Text>
+                    <Text
+                        fontSize='xl'
+                        fontWeight='bold'
+                    >
+                        Your Loans
+                    </Text>
+                    <Text>
+                        Owed Amount: ${loans.reduce((acc, loan) => acc + loan.amount, 0)}
+                    </Text>
+                </HStack>
                 {
-                    loans.map((loan) => (
+                    loans.filter(loan => loan.amount > 0).map((loan) => (
                         <Loan 
-                            key={loan.loanId}
+                            key={loan.loanID}
                             loan={loan}
                         />
                     ))

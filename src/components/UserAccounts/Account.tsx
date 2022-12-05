@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Box, Text, useDisclosure } from '@chakra-ui/react'
 
+import AccountModal from './AccountModal';
 
-import { Account } from '../../types/account'
-import LoanModal from './LoanModal'
+import { AccountData } from '../../types/account'
 
 interface Props {
-    account: Account
+    account: AccountData
 }
 
 const AccountComponent : React.FC<Props> = ({ account }) => {
@@ -16,9 +16,10 @@ const AccountComponent : React.FC<Props> = ({ account }) => {
 
   return (
     <>
-      <LoanModal 
-        isLoanModalOpen={isOpen}
+      <AccountModal 
+        isAccountModalOpen={isOpen}
         closeModal={onClose}
+        accountID={account.accountID}
       />
       <Box
           border='1px'
@@ -35,7 +36,7 @@ const AccountComponent : React.FC<Props> = ({ account }) => {
         <Text
           fontWeight='bold'
         >
-          {account.branchName}
+          {account.bankName} {account.branchName}
         </Text>
         <Text>
           Balance: ${account.balance.toLocaleString()}

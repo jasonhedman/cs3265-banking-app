@@ -6,9 +6,13 @@ import Employee from './Employee';
 
 import useEmployees from '../../hooks/useEmployees'
 
-const Employees : React.FC = () => {
+interface Props {
+    branchId: string
+}
 
-    const { employees } = useEmployees();
+const Employees : React.FC<Props> = ({ branchId }) => {
+
+    const { employees } = useEmployees(branchId);
 
     return (
         <VStack
@@ -22,7 +26,7 @@ const Employees : React.FC = () => {
             {
                 employees.map((employee) => (
                     <Employee 
-                        key={employee.employeeId}
+                        key={employee.employeeID}
                         employee={employee}
                     />
                 ))

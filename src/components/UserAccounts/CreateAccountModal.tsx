@@ -15,24 +15,28 @@ import {
 import useCreateAccount from '../../hooks/useCreateAccount'
 import SelectBank from '../Banks/SelectBank'
 import SelectBranch from './SelectBranch'
-import useBanks from '../../hooks/useBanks'
 
 interface Props {
     isCreateAccountModalOpen: boolean,
-    userId: string,
     closeModal: () => void
 }
 
-const CreateAccountModal : React.FC<Props> = ({ isCreateAccountModalOpen, userId, closeModal }) => {
-
-    const { banks, selectedBank, selectBank} = useBanks();
+const CreateAccountModal : React.FC<Props> = ({ isCreateAccountModalOpen, closeModal }) => {
 
     const {
+        banks,
+        selectedBank,
+        selectBank,
         branches,
         selectedBranch,
         selectBranch,
         createAccount
-    } = useCreateAccount(userId);
+    } = useCreateAccount();
+
+    const onCreate = () => {
+        createAccount();
+        closeModal();
+    }
 
   return (
     <Modal 
@@ -61,7 +65,7 @@ const CreateAccountModal : React.FC<Props> = ({ isCreateAccountModalOpen, userId
                 justifyContent='center'
             >
                 <Button 
-                    onClick={createAccount}
+                    onClick={onCreate}
                     colorScheme='blue'
                 >
                     Create Account

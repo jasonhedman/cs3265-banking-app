@@ -9,41 +9,60 @@ import {
     ModalCloseButton,
     ModalFooter,
     Button,
-    Input
+    NumberInput,
+    NumberInputField
 } from '@chakra-ui/react'
+
+import useLoans from '../../hooks/useLoans';
 
 interface Props {
     isRepayLoanModalOpen: boolean,
     closeModal: () => void,
+    loanID: string,
 }
 
-const RepayLoanModal : React.FC<Props> = ({ isRepayLoanModalOpen, closeModal }) => {
-  return (
-    <Modal 
-        isOpen={isRepayLoanModalOpen} 
-        onClose={closeModal}
-    >
-        <ModalOverlay />
-        <ModalContent>
-            <ModalHeader>Repay Loan</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-                <Input 
-                    placeholder='Amount'
-                />
-            </ModalBody>
-            <ModalFooter
-                justifyContent='center'
-            >
-                <Button 
-                    colorScheme='blue'
+const RepayLoanModal : React.FC<Props> = ({ isRepayLoanModalOpen, closeModal, loanID }) => {
+
+    const { repayLoan } = useLoans();
+
+    const [amount, setAmount] = React.useState(0);
+
+    const onRepay = () => {
+        repayLoan(loanID, amount);
+        closeModal();
+    }
+
+    return (
+        <Modal 
+            isOpen={isRepayLoanModalOpen} 
+            onClose={closeModal}
+        >
+            <ModalOverlay />
+            <ModalContent>
+                <ModalHeader>Repay Loan</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <NumberInput
+                        placeholder='Amount'
+                        value={amount}
+                        onChange={(_, inputAmount) => setAmount(inputAmount)}
+                    >
+                        <NumberInputField />
+                    </NumberInput>
+                </ModalBody>
+                <ModalFooter
+                    justifyContent='center'
                 >
-                    Repay
-                </Button>
-            </ModalFooter>
-        </ModalContent>
-    </Modal>
-  )
+                    <Button
+                        colorScheme='blue'
+                        onClick={onRepay}
+                    >
+                        Repay
+                    </Button>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
+    )
 }
 
 export default RepayLoanModal

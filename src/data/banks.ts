@@ -2,15 +2,27 @@ import { Bank } from "../types/bank";
 
 export const banks: Bank[] = [
     {
-        bankId: '1',
+        bankID: '1',
         bankName: 'Bank of America',
     },
     {
-        bankId: '2',
+        bankID: '2',
         bankName: 'Chase',
     },
     {
-        bankId: '3',
+        bankID: '3',
         bankName: 'Wells Fargo',
-    }
+    },
+    {
+        bankID: '4',
+        bankName: 'Citi',
+    },
+    {
+        bankID: '5',
+        bankName: 'Capital One',
+    },
 ]
+
+export const getBankByBankID = (bankID: string): Bank | undefined => {
+    return banks.find((bank) => bank.bankID === bankID)
+}

@@ -7,7 +7,7 @@ import { Bank } from "../types/bank";
 const useBanks = () => {
 
     const [banks, setBanks] = React.useState<Bank[]>([]);
-    const [selectedBank, setSelectedBank] = React.useState<Bank | null>(null);
+    const [selectedBank, setSelectedBank] = React.useState<Bank>(bankData[0]);
     
     const selectBank = (bank: Bank) => {
         setSelectedBank(bank);

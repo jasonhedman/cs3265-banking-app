@@ -1,31 +1,50 @@
 import React from 'react';
-import { User } from '../types/user';
+import { singletonHook } from 'react-singleton-hook';
+import { getUserDataByEmail } from '../data/users';
+import { UserData } from '../types/user';
 
-const useAuth = () => {
+const initialState = {
+    isSignedIn: false,
+    isSignInError: false,
+    user: null,
+    signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => { },
+    signIn: (email: string) => { }
+}
+
+const useAuthImpl = () => {
 
     const [isSignedIn, setIsSignedIn] = React.useState(false);
-    const [user, setUser] = React.useState<User | null>(null);
+    const [isSignInError, setIsSignInError] = React.useState(false);
+    const [user, setUser] = React.useState<UserData | null>(null);
 
     const signUp = (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => {
         setUser({
-            userId: '123',
+            userID: '123',
             email,
             ssn,
             dateOfBirth,
-            phoneNumber
+            phoneNumbers: [phoneNumber]
         })
         setIsSignedIn(true);
     }
 
     const signIn = (email: string) => {
-        setIsSignedIn(true);
+        let userData = getUserDataByEmail(email);
+        if (userData !== undefined) {
+            setUser(userData);
+            setIsSignedIn(true);
+        } else {
+            setIsSignInError(true);
+        }
     }
 
     return {
+        user,
         isSignedIn,
+        isSignInError,
         signUp,
         signIn
     }
 }
 
-export default useAuth
+export default singletonHook(initialState, useAuthImpl);

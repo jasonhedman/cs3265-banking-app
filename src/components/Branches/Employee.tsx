@@ -20,13 +20,13 @@ const EmployeeComponent : React.FC<Props> = ({ employee }) => {
         <Text
             fontWeight='bold'
         >
-            {employee.employeeName}
+            {employee.name}
         </Text>
         <Text>
             Role: {getEmployeeTitle(employee.type)}
         </Text>
         <Text>
-            Salary: ${employee.employeeSalary.toLocaleString()}
+            Salary: ${employee.salary.toLocaleString()}
         </Text>
     </Box>
   )

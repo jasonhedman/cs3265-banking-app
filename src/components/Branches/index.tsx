@@ -46,7 +46,7 @@ const Branches : React.FC<Props> = ({ selectedBank }) => {
                 {
                     branches.map((branch) => (
                         <Branch 
-                            key={branch.branchId}
+                            key={branch.branchID}
                             branch={branch}
                             openBranchModal={openBranchModal}
                         />

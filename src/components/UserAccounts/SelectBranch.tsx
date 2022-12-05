@@ -9,12 +9,12 @@ import {
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 
-import { Branch } from '../../types/branches'
+import { BranchData } from '../../types/branches'
 
 interface Props {
-    branches: Branch[]
-    seletctedBranch: Branch | null
-    selectBranch: (branch: Branch) => void
+    branches: BranchData[]
+    seletctedBranch: BranchData | null
+    selectBranch: (branch: BranchData) => void
 }
 
 const SelectBranch : React.FC<Props> = ({ branches, seletctedBranch, selectBranch}) => {
@@ -27,7 +27,7 @@ const SelectBranch : React.FC<Props> = ({ branches, seletctedBranch, selectBranc
                 {
                     branches.map((branch) => (
                         <MenuItem
-                            key={branch.branchId}
+                            key={branch.branchID}
                             onClick={() => selectBranch(branch)}
                         >
                             {branch.branchName}

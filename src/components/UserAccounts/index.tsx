@@ -9,28 +9,34 @@ import CreateAccount from './CreateAccount';
 import useAccounts from '../../hooks/useAccounts';
 
 
-const userId = "1"
-
 const UserAccounts : React.FC = () => {
 
-    const { userAccounts } = useAccounts(userId);
+    const { userAccounts } = useAccounts();
 
     return (
         <Card>
             <VStack
                 alignItems='flex-start'
             >
-                <Text
-                    fontSize='xl'
-                    fontWeight='bold'
+                <HStack
+                    justifyContent='space-between'
+                    w='100%'
                 >
-                    Your Accounts
-                </Text>
+                    <Text
+                        fontSize='xl'
+                        fontWeight='bold'
+                    >
+                        Your Accounts
+                    </Text>
+                    <Text>
+                        Balance: ${userAccounts.reduce((acc, account) => acc + account.balance, 0)}
+                    </Text>
+                </HStack>
                 {
                     userAccounts.length > 0 ? (
                         userAccounts.map((account) => (
                             <Account 
-                                key={account.accountId}
+                                key={account.accountID}
                                 account={account}
                             />
                         ))
@@ -44,9 +50,7 @@ const UserAccounts : React.FC = () => {
                     w='100%'
                     justifyContent='center'
                 >
-                    <CreateAccount 
-                        userId={userId}
-                    />
+                    <CreateAccount />
                 </HStack>
             </VStack>
         </Card>

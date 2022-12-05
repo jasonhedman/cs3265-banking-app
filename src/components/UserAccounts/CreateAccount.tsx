@@ -2,11 +2,7 @@ import { Button, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import CreateAccountModal from './CreateAccountModal';
 
-interface Props {
-    userId: string
-}
-
-const CreateAccount : React.FC<Props> = ({ userId}) => {
+const CreateAccount : React.FC = () => {
 
     const { onOpen, onClose, isOpen} = useDisclosure();
 
@@ -14,7 +10,6 @@ const CreateAccount : React.FC<Props> = ({ userId}) => {
     <>
         <CreateAccountModal 
             isCreateAccountModalOpen={isOpen}
-            userId={userId}
             closeModal={onClose}
         />
         <Button

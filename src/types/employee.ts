@@ -1,8 +1,9 @@
 export interface Employee {
-    employeeId: string;
-    employeeName: string;
-    employeeSalary: number;
+    employeeID: string;
+    branchID: string;
+    name: string;
+    salary: number;
     type: EmployeeType;
 }
 
-export type EmployeeType = 'teller' | 'loanOfficer';
+export type EmployeeType = 'Teller' | 'LoanOfficer';

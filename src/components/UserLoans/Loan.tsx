@@ -19,6 +19,7 @@ const LoanComponent : React.FC<Props> = ({ loan }) => {
         <RepayLoanModal 
             isRepayLoanModalOpen={isOpen}
             closeModal={onClose}
+            loanID={loan.loanID}
         />
         <Box
             border='1px'
@@ -38,7 +39,7 @@ const LoanComponent : React.FC<Props> = ({ loan }) => {
                 Amount: ${loan.amount}
             </Text>
             <Text>
-                Interest: {loan.interest * 10}%
+                Interest: {loan.interestRate * 100}%
             </Text>
             <Text>
                 Due By: {loan.dueBy}

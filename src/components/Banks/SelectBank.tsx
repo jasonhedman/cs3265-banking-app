@@ -27,7 +27,7 @@ const SelectBank : React.FC<Props> = ({ banks, selectedBank, selectBank }) => {
             {
                 banks.map((bank) => (
                     <MenuItem
-                        key={bank.bankId}
+                        key={bank.bankID}
                         onClick={() => selectBank(bank)}
                     >
                         {bank.bankName}

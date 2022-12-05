@@ -1,6 +1,7 @@
 export interface Loan {
+    loanID: string;
+    accountID: string;
     dueBy: string;
     amount: number;
-    interest: number;
-    loanId: string;
+    interestRate: number;
 }
