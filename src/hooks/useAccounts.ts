@@ -11,7 +11,8 @@ const initValues = {
     userAccounts: [],
     addAccount: (branchID: string) => {},
     deposit: (accountID: string, amount: number) => {},
-    withdraw: (accountID: string, amount: number) => {}
+    withdraw: (accountID: string, amount: number) => {},
+    deleteAccount: (accountID: string) => {},
 }
 
 const useAccounts = () => {
@@ -56,12 +57,18 @@ const useAccounts = () => {
             setUserAccounts([...accountsCopy]);
         }
     }
+
+    const deleteAccount = (accountID: string) => {
+        const accountsCopy = [...userAccounts];
+        setUserAccounts(accountsCopy.filter(account => account.accountID !== accountID));
+    }
     
     return {
         userAccounts,
         addAccount,
         deposit,
-        withdraw
+        withdraw,
+        deleteAccount
     };
 }
 

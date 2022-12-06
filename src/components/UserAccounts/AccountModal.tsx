@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import TakeLoan from './TakeLoan'
 import DepositWithdraw from './DepositWithdraw'
+import DeleteAccount from './DeleteAccount'
 
 interface Props {
     accountID: string
@@ -27,6 +28,7 @@ const AccountModal : React.FC<Props> = ({ isAccountModalOpen, closeModal, accoun
     <Modal 
         isOpen={isAccountModalOpen} 
         onClose={closeModal}
+        size='xl'
     >
         <ModalOverlay />
         <ModalContent>
@@ -39,6 +41,7 @@ const AccountModal : React.FC<Props> = ({ isAccountModalOpen, closeModal, accoun
                     >
                         <Tab>Deposit/Withdraw</Tab>
                         <Tab>Take Loan</Tab>
+                        <Tab>Delete Account</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>
@@ -50,6 +53,12 @@ const AccountModal : React.FC<Props> = ({ isAccountModalOpen, closeModal, accoun
                         <TabPanel>
                             <TakeLoan 
                                 accountID={accountID} 
+                                closeModal={closeModal}
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                            <DeleteAccount 
+                                accountID={accountID}
                                 closeModal={closeModal}
                             />
                         </TabPanel>
