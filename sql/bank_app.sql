@@ -1,3 +1,5 @@
+-- Database Setup
+
 -- create the Bank table with BankId and BankName
 -- BankId is the primary key
 create table Bank(
@@ -14,7 +16,7 @@ insert into Bank values (4, 'Citibank');
 insert into Bank values (5, 'Capital One');
 
 create table BankBranch(
-        BranchID int AUTO_INCREMENT,
+        BranchID int,
         BankID int,
         Address varchar(30) not null,
         BranchName varchar(15) not null,
@@ -83,7 +85,7 @@ insert into Employee values ('John Steward', 29, 50000, 15, 'Teller');
 insert into Employee values ('Mary Smith', 30, 60000, 15, 'LoanOfficer');
 
 create table User(
-        UserID int AUTO_INCREMENT,
+        UserID int,
         Email varchar(30),
         SSN char(9) not null,
         DateOfBirth date not null,
@@ -178,37 +180,75 @@ insert into Payment values (7, 6, 1000);
 insert into Payment values (8, 7, 1000);
 insert into Payment values (9, 8, 1000);
 
--- Operations needed:
+-- Application Design
 
 -- Create User given email, phone number, SSN, date of birth, and phone numbers)
-insert into User values (6, 'jason@hedmans.org', '123456789', '2002-07-09');
-insert into UserPhoneNumber values (6, '1234567890');
+insert into User (UserID, Email, SSN, DateOfBirth) values (6, 'jason@hedmans.org', '123456789', '2002-07-09');
+insert into UserPhoneNumber (UserID, PhoneNumber) values (6, '1234567890');
+insert into UserPhoneNumber (UserID, PhoneNumber) values (6, '0987654321');
+
 -- Get user given email-address
-SELECT * FROM User WHERE Email = 'jason@hedmans.org';
--- Create account for UserId given bank and branch
-insert into Account values (9, 1, 6, '2018-01-01', 1000);
-insert into Account values (10, 2, 6, '2018-01-02', 2000);
+SELECT * 
+FROM User, UserPhoneNumber
+WHERE Email = 'jason@hedmans.org' AND User.UserID = UserPhoneNumber.UserID;
+
+-- Create account for UserId given branch
+insert into Account(AccountID, BranchID, UserID, OpenDate, Balance) values (9, 1, 6, '2018-01-01', 1000);
+insert into Account(AccountID, BranchID, UserID, OpenDate, Balance) values (10, 2, 6, '2018-01-02', 2000);
+
 -- get accounts given UserId
 SELECT * FROM Account WHERE UserID = 6;
+
+-- get total balance for UserID
+SELECT SUM(Balance) FROM Account WHERE UserID = 6;
+
+-- deposit amount to Account given AccountId
+update Account set Balance = Balance + 1000 where AccountID = 9;
+select Balance from Account where AccountID = 9;
+
+-- withdraw amount from Account given AccountId
+update Account set Balance = Balance - 500 where AccountID = 9;
+select Balance from Account where AccountID = 9;
+
 -- create loan for account
 Insert into Loan values (10, 10000, 0.05, '2023-01-01', 9);
 Insert into Loan values (11, 20000, 0.05, '2023-01-02', 10);
+
 -- get loans given UserId
 SELECT * FROM Loan WHERE AccountID IN (SELECT AccountID FROM Account WHERE UserID = 6);
+
+-- get sum of loans for UserID
+SELECT SUM(TotalAmount) FROM Loan WHERE AccountID IN (SELECT AccountID FROM Account WHERE UserID = 6);
+
 -- repay loan given LoanId
 Insert into Payment values (10, 10, 1000);
 Insert into Payment values (11, 10, 1000);
 Insert into Payment values (12, 11, 1000);
+
+-- get payments given UserId
+SELECT * FROM Payment WHERE LoanID IN (SELECT LoanID FROM Loan WHERE AccountID IN (SELECT AccountID FROM Account WHERE UserID = 6));
+
 -- get amount remaining on loan given LoanId
 SELECT TotalAmount - SUM(Amount) FROM Payment, Loan WHERE Loan.LoanID = 10 AND Payment.LoanID = 10;
+
+-- get total amount remaining on all loans for UserID
+SELECT SUM(Loan.TotalAmount - Payment.Amount) 
+FROM Payment, Loan, Account 
+WHERE Account.UserID = 6 AND Account.AccountID = Loan.AccountID AND Payment.LoanID = Loan.LoanID;
+
+-- get banks
+SELECT * FROM Bank;
+
 -- get branches by BankID
-SELECT * FROM BankBranch WHERE BankID = 1;
+SELECT * 
+FROM BankBranch, Bank 
+WHERE Bank.BankID = 1 AND BankBranch.BankID = Bank.BankID;
+
 -- get employees by branch
 SELECT * FROM Employee WHERE BranchID = 1;
+
 -- get employees by bank
 SELECT * FROM Employee WHERE BranchID IN (SELECT BranchID FROM BankBranch WHERE BankID = 1);
 
--- Delete account
--- This set of code will delete a user's account
-Delete FROM Account where AccountID="1";
-Delete FROM Loan where AccountID="1";
+-- delete an employee given EmployeeID
+DELETE FROM Employee WHERE EmployeeID = 1;
