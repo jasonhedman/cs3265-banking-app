@@ -12,7 +12,7 @@ interface Props {
 
 const Employees : React.FC<Props> = ({ branchId }) => {
 
-    const { employees } = useEmployees(branchId);
+    const { employees, deleteEmployee } = useEmployees(branchId);
 
     return (
         <VStack
@@ -28,6 +28,7 @@ const Employees : React.FC<Props> = ({ branchId }) => {
                     <Employee 
                         key={employee.employeeID}
                         employee={employee}
+                        deleteEmployee={deleteEmployee}
                     />
                 ))
             }

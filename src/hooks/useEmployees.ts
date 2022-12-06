@@ -11,8 +11,13 @@ const useEmployees = (branchId: string) => {
         setEmployees(getEmployeesByBranchID(branchId))
     }, [branchId])
 
+    const deleteEmployee = (employeeId: string) => {
+        setEmployees(employees.filter(employee => employee.employeeID !== employeeId))
+    }
+
     return {
         employees,
+        deleteEmployee
     }
 }
 
