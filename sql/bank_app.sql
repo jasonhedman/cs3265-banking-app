@@ -207,3 +207,8 @@ SELECT * FROM BankBranch WHERE BankID = 1;
 SELECT * FROM Employee WHERE BranchID = 1;
 -- get employees by bank
 SELECT * FROM Employee WHERE BranchID IN (SELECT BranchID FROM BankBranch WHERE BankID = 1);
+
+-- Delete account
+-- This set of code will delete a user's account
+Delete FROM Account where AccountID="1";
+Delete FROM Loan where AccountID="1";
