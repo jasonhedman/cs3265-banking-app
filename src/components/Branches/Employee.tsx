@@ -1,7 +1,8 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Box, Flex, IconButton, Text } from '@chakra-ui/react'
 import React from 'react'
-import { getEmployeeTitle } from '../../data/employees'
+
+import { getEmployeeTitle } from '../../services/employees'
 
 import { Employee } from '../../types/employee'
 

@@ -29,7 +29,7 @@ const UserAccounts : React.FC = () => {
                         Your Accounts
                     </Text>
                     <Text>
-                        Balance: ${userAccounts.reduce((acc, account) => acc + account.balance, 0)}
+                        Balance: ${userAccounts.reduce((acc, account) => acc + account.balance, 0).toLocaleString()}
                     </Text>
                 </HStack>
                 {

@@ -1,14 +1,17 @@
 import React from 'react';
+
 import { singletonHook } from 'react-singleton-hook';
-import { getUserDataByEmail } from '../data/users';
+
+import { createUser, getUserByEmail } from '../services/users';
+
 import { UserData } from '../types/user';
 
 const initialState = {
     isSignedIn: false,
     isSignInError: false,
     user: null,
-    signUp: (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => { },
-    signIn: (email: string) => { }
+    signUp: async (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => { },
+    signIn: async (email: string) => { }
 }
 
 const useAuthImpl = () => {
@@ -17,19 +20,13 @@ const useAuthImpl = () => {
     const [isSignInError, setIsSignInError] = React.useState(false);
     const [user, setUser] = React.useState<UserData | null>(null);
 
-    const signUp = (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => {
-        setUser({
-            userID: '123',
-            email,
-            ssn,
-            dateOfBirth,
-            phoneNumbers: [phoneNumber]
-        })
-        setIsSignedIn(true);
+    const signUp = async (email: string, ssn: string, dateOfBirth: string, phoneNumber: string) => {
+        await createUser(email, ssn, dateOfBirth, phoneNumber);
+        signIn(email);
     }
 
-    const signIn = (email: string) => {
-        let userData = getUserDataByEmail(email);
+    const signIn = async (email: string) => {
+        let userData = await getUserByEmail(email);
         if (userData !== undefined) {
             setUser(userData);
             setIsSignedIn(true);

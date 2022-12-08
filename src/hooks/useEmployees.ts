@@ -1,18 +1,26 @@
-import React from "react"
+import { useState, useEffect, useCallback} from "react"
 
-import { getEmployeesByBranchID } from "../data/employees";
+import { getEmployees, deleteEmployee as deleteEmployeeFetch } from "../services/employees";
 
 import { Employee } from "../types/employee";
 
 const useEmployees = (branchId: string) => {
-    const [employees, setEmployees] = React.useState<Employee[]>([])
+    const [employees, setEmployees] = useState<Employee[]>([])
 
-    React.useEffect(() => {
-        setEmployees(getEmployeesByBranchID(branchId))
+    const setEmployeesData = useCallback(async () => {
+        const employees = await getEmployees(branchId)
+        if (employees) {
+            setEmployees(employees)
+        }
     }, [branchId])
 
-    const deleteEmployee = (employeeId: string) => {
-        setEmployees(employees.filter(employee => employee.employeeID !== employeeId))
+    useEffect(() => {
+        setEmployeesData()
+    }, [setEmployeesData])
+
+    const deleteEmployee = async (employeeId: string) => {
+        await deleteEmployeeFetch(employeeId);
+        setEmployeesData();
     }
 
     return {

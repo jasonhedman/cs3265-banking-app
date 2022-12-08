@@ -11,6 +11,10 @@ const UserLoans : React.FC = () => {
 
     const { loans } = useLoans();
 
+    console.log(loans);
+
+    const outstandingLoans = loans.filter(loan => loan.totalAmount - loan.amountPaid > 0);
+
     return (
         <Card>
             <VStack
@@ -27,11 +31,11 @@ const UserLoans : React.FC = () => {
                         Your Loans
                     </Text>
                     <Text>
-                        Owed Amount: ${loans.reduce((acc, loan) => acc + loan.amount, 0)}
+                        Owed Amount: ${outstandingLoans.reduce((acc, loan) => acc + loan.totalAmount - loan.amountPaid, 0).toLocaleString()}
                     </Text>
                 </HStack>
                 {
-                    loans.filter(loan => loan.amount > 0).map((loan) => (
+                    outstandingLoans.map((loan) => (
                         <Loan 
                             key={loan.loanID}
                             loan={loan}

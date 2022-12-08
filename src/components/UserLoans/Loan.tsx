@@ -36,7 +36,13 @@ const LoanComponent : React.FC<Props> = ({ loan }) => {
             <Text
                 fontWeight='bold'
             >
-                Amount: ${loan.amount}
+                Loan Amount: ${loan.totalAmount}
+            </Text>
+            <Text>
+                Amount Paid: ${loan.amountPaid}
+            </Text>
+            <Text>
+                Amount Remaining: ${loan.totalAmount - loan.amountPaid}
             </Text>
             <Text>
                 Interest: {loan.interestRate * 100}%

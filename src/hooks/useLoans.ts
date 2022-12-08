@@ -1,15 +1,15 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { singletonHook } from "react-singleton-hook"
 
-import { getLoansByUserID } from "../data/loans"
+import { createLoan, getLoansForUserId, payLoan } from "../services/loans"
 
 import { Loan } from "../types/loan"
 import useAuth from "./useAuth"
 
 const initValues = {
     loans: [],
-    takeLoan: (accountID: string, amount: number) => {},
-    repayLoan: (loanID: string, amount: number) => {},
+    takeLoan: async (accountID: string, amount: number) => {},
+    repayLoan: async (loanID: string, amount: number) => {},
 }
 
 const useLoans = () => {
@@ -18,29 +18,29 @@ const useLoans = () => {
 
     const [loans, setLoans] = React.useState<Loan[]>([])
 
-    React.useEffect(() => {
-        if (user) {
-            setLoans(getLoansByUserID(user.userID));
+    const getLoans = useCallback(async () => {
+        const loans = await getLoansForUserId(user?.userID || '');
+        if (loans) {
+            setLoans(loans);
         }
     }, [user])
 
-    const takeLoan = (accountID: string, amount: number) => {
-        setLoans([...loans, {
-            loanID: (loans.length + 1).toString(),
-            accountID,
-            amount,
-            dueBy: "2023-01-01",
-            interestRate: 0.05,
-        }])
+    React.useEffect(() => {
+        getLoans();
+    }, [getLoans])
+
+    const takeLoan = async (accountID: string, amount: number) => {
+        const loanID = await createLoan(accountID, amount);
+        if (loanID) {
+            getLoans();
+        }
     }
 
-    const repayLoan = (loanID: string, amount: number) => {
-        let newLoans = [...loans];
-        const loanIndex = newLoans.findIndex(loan => loan.loanID === loanID);
-        if (loanIndex > -1) {
-            newLoans[loanIndex].amount -= amount;
+    const repayLoan = async (loanID: string, amount: number) => {
+        const paymentID = await payLoan(loanID, amount);
+        if(paymentID) {
+            getLoans();
         }
-        setLoans(newLoans);
     }
 
     return {

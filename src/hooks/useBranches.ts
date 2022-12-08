@@ -1,16 +1,22 @@
 import React from "react";
 
-import { getBranchesDataByBankID } from "../data/branches";
+import { getBranches } from "../services/branches";
 
 import { Bank } from "../types/bank";
 import { BranchData } from "../types/branches";
 
-const useBranches = (bank: Bank) => {
+const useBranches = (bank: Bank | null) => {
 
     const [branches, setBranches] = React.useState<BranchData[]>([]);
 
     React.useEffect(() => {
-        setBranches(getBranchesDataByBankID(bank.bankID));
+        const setBranchesData = async () => {
+            const branches = await getBranches(bank?.bankID || '');
+            if (branches) {
+                setBranches(branches);
+            }
+        }
+        setBranchesData();
     }, [bank])
 
     return {
