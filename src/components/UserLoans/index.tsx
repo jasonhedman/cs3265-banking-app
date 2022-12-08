@@ -30,7 +30,11 @@ const UserLoans : React.FC = () => {
                     >
                         Your Loans
                     </Text>
-                    <Text>
+                    <Text
+                        fontWeight='bold'
+                        fontSize='lg'
+                        color='red.400'
+                    >
                         Owed Amount: ${outstandingLoans.reduce((acc, loan) => acc + loan.totalAmount - loan.amountPaid, 0).toLocaleString()}
                     </Text>
                 </HStack>
@@ -41,6 +45,13 @@ const UserLoans : React.FC = () => {
                             loan={loan}
                         />
                     ))
+                }
+                {
+                    outstandingLoans.length === 0 && (
+                        <Text>
+                            You have no outstanding loans.
+                        </Text>
+                    )
                 }
             </VStack>
         </Card>

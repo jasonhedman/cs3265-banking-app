@@ -9,16 +9,11 @@ interface Props {
     closeModal: () => void
 }
 
-const DepositWithdraw: React.FC<Props> = ({ accountID, closeModal }) => {
+const Deposit: React.FC<Props> = ({ accountID, closeModal }) => {
 
-    const { deposit, withdraw } = useAccount(accountID);
+    const { withdraw } = useAccount(accountID);
 
     const [amount, setAmount] = React.useState(0);
-
-    const onDeposit = () => {
-        deposit(amount);
-        closeModal();
-    }
 
     const onWithdraw = () => {
         withdraw(amount);
@@ -38,17 +33,13 @@ const DepositWithdraw: React.FC<Props> = ({ accountID, closeModal }) => {
             <HStack>
                 <Button
                     onClick={onWithdraw}
+                    colorScheme='blue'
                 >
                     Withdraw
-                </Button>
-                <Button
-                    onClick={onDeposit}
-                >
-                    Deposit
                 </Button>
             </HStack>
         </VStack>
     )
 }
 
-export default DepositWithdraw
+export default Deposit

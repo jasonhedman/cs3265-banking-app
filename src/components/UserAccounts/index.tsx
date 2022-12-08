@@ -28,8 +28,12 @@ const UserAccounts : React.FC = () => {
                     >
                         Your Accounts
                     </Text>
-                    <Text>
-                        Balance: ${userAccounts.reduce((acc, account) => acc + account.balance, 0).toLocaleString()}
+                    <Text
+                        fontWeight='bold'
+                        fontSize='lg'
+                        color='green.500'
+                    >
+                        Total Balance: ${userAccounts.reduce((acc, account) => acc + account.balance, 0).toLocaleString()}
                     </Text>
                 </HStack>
                 {

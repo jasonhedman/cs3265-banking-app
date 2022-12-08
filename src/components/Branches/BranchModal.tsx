@@ -7,6 +7,7 @@ import {
     ModalHeader,
     ModalBody,
     ModalCloseButton,
+    ModalFooter,
 } from '@chakra-ui/react'
 import { BranchData } from '../../types/branches'
 import Employees from './Employees'
@@ -37,6 +38,7 @@ const BranchModal : React.FC<Props> = ({ isBranchModalOpen, selectedBranch, clos
                 </ModalContent>
             )
         }
+        <ModalFooter />
     </Modal>
   )
 }

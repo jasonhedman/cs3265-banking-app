@@ -3,7 +3,7 @@ import React from 'react'
 import Card from '../utilities/Card'
 
 import {
-    Text
+    Text, VStack
 } from '@chakra-ui/react'
 import useAuth from '../../hooks/useAuth'
 
@@ -13,18 +13,28 @@ const Header : React.FC = () => {
 
     return (
         <Card>
-            <Text
-                fontSize='2xl'
-                fontWeight='bold'
+            <VStack
+                alignItems='flex-start'
             >
-                Welcome to our Banking App
-            </Text>
-            <Text>
-                Connected Email: {user?.email}
-            </Text>
-            <Text>
-                Made by Harrison Duval, Harper Messer, and Jason Hedman
-            </Text>
+                <Text
+                    fontSize='2xl'
+                    fontWeight='bold'
+                >
+                    CS 3265 Banking App
+                </Text>
+                <Text
+                    fontSize='lg'
+                    fontWeight='bold'
+                    color='gray.700'
+                >
+                    Connected Email: {user?.email}
+                </Text>
+                <Text
+                    color='blackAlpha.600'
+                >
+                    Made by Harrison Duval, Harper Messer, and Jason Hedman
+                </Text>
+            </VStack>
         </Card>
     )
 }

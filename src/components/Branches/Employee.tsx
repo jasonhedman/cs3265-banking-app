@@ -20,6 +20,7 @@ const EmployeeComponent : React.FC<Props> = ({ employee, deleteEmployee }) => {
         p={4}
         w='100%'
         justifyContent='space-between'
+        alignItems='center'
     >
         <Box>
             <Text
@@ -38,6 +39,7 @@ const EmployeeComponent : React.FC<Props> = ({ employee, deleteEmployee }) => {
             aria-label='Delete Employee'
             icon={<DeleteIcon />}
             onClick={() => deleteEmployee(employee.employeeID)}
+            colorScheme='red'
         />
     </Flex>
   )

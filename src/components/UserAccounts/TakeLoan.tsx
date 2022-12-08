@@ -32,6 +32,7 @@ const TakeLoan: React.FC<Props> = ({ accountID, closeModal }) => {
             </NumberInput>
             <Button
                 onClick={onClick}
+                colorScheme='blue'
             >
                 Take Loan
             </Button>
