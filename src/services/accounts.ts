@@ -11,7 +11,7 @@ interface AccountRecord {
     BankName: string
 }
 export const getAccountsForUserId = async (userID: string): Promise<AccountData[] | undefined> => {
-    const response = await fetch(`http://localhost:8080/accounts?userId=${userID}`)
+    const response = await fetch(`https://hedbot2022.herokuapp.com/accounts?userId=${userID}`)
     if(response.status === 200){
         const data: AccountRecord[] = await response.json()
         if(data.length === 0){
@@ -33,7 +33,7 @@ export const getAccountsForUserId = async (userID: string): Promise<AccountData[
 }
 
 export const createAccount = async (userID: string, branchID: string): Promise<AccountData[] | undefined> => {
-    const response = await fetch(`http://localhost:8080/account/create`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/account/create`, {
         method: 'POST',
         body: JSON.stringify({
             userID,
@@ -56,7 +56,7 @@ export const createAccount = async (userID: string, branchID: string): Promise<A
 }
 
 export const deposit = async (accountID: string, amount: number): Promise<number | undefined> => {
-    const response = await fetch(`http://localhost:8080/deposit`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/deposit`, {
         method: 'POST',
         body: JSON.stringify({
             accountID,
@@ -75,7 +75,7 @@ export const deposit = async (accountID: string, amount: number): Promise<number
 }
 
 export const withdraw = async (accountID: string, amount: number): Promise<number | undefined> => {
-    const response = await fetch(`http://localhost:8080/withdraw`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/withdraw`, {
         method: 'POST',
         body: JSON.stringify({
             accountID,

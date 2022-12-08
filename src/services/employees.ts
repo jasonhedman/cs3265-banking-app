@@ -9,7 +9,7 @@ interface EmployeeRecord {
 }
 
 export const getEmployees = async (branchID: string) : Promise<Employee[] | undefined> => {
-    const response = await fetch(`http://localhost:8080/employees?branchID=${branchID}`)
+    const response = await fetch(`https://hedbot2022.herokuapp.com/employees?branchID=${branchID}`)
     const data: EmployeeRecord[] = await response.json()
     return data.map(employeeRecord => ({
         employeeID: employeeRecord.EmployeeID.toString(),
@@ -21,7 +21,7 @@ export const getEmployees = async (branchID: string) : Promise<Employee[] | unde
 }
 
 export const deleteEmployee = async (employeeID: string) : Promise<void> => {
-    const response = await fetch(`http://localhost:8080/employee/delete`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/employee/delete`, {
         method: 'POST',
         body: JSON.stringify({
             employeeID

@@ -9,7 +9,7 @@ interface UserRecord {
 }
 
 export const getUserByEmail = async (email: string): Promise<UserData | undefined> => {
-    const response = await fetch(`http://localhost:8080/user?email=${email}`)
+    const response = await fetch(`https://hedbot2022.herokuapp.com/user?email=${email}`)
     if(response.status === 200){
         const data: UserRecord[] = await response.json()
         if(data.length === 0){
@@ -28,7 +28,7 @@ export const getUserByEmail = async (email: string): Promise<UserData | undefine
 }
 
 export const createUser = async (email: string, ssn: string, dateOfBirth: string, phoneNumber: string): Promise<number | undefined> => {
-    const response = await fetch(`http://localhost:8080/user/create`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/user/create`, {
         method: 'POST',
         body: JSON.stringify({
             email,

@@ -10,7 +10,7 @@ interface LoanRecord {
 }
 
 export const getLoansForUserId = async (userID: string): Promise<Loan[] | undefined> => {
-    const response = await fetch(`http://localhost:8080/loans?userId=${userID}`)
+    const response = await fetch(`https://hedbot2022.herokuapp.com/loans?userId=${userID}`)
     if(response.status === 200){
         const data: LoanRecord[] = await response.json()
         if(data.length === 0){
@@ -33,7 +33,7 @@ export const getLoansForUserId = async (userID: string): Promise<Loan[] | undefi
 }
 
 export const createLoan = async (accountID: string, amount: number): Promise<number | undefined> => {
-    const response = await fetch(`http://localhost:8080/loan/create`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/loan/create`, {
         method: 'POST',
         body: JSON.stringify({
             accountID,
@@ -52,7 +52,7 @@ export const createLoan = async (accountID: string, amount: number): Promise<num
 }
 
 export const payLoan = async (loanID: string, amount: number): Promise<number | undefined> => {
-    const response = await fetch(`http://localhost:8080/loan/pay`, {
+    const response = await fetch(`https://hedbot2022.herokuapp.com/loan/pay`, {
         method: 'POST',
         body: JSON.stringify({
             loanID,

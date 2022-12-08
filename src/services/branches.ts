@@ -9,7 +9,7 @@ interface BranchRecord {
 }
 
 export const getBranches = async (bankId: string) : Promise<BranchData[] | undefined> => {
-    const response = await fetch(`http://localhost:8080/bankBranches?bankID=${bankId}`)
+    const response = await fetch(`https://hedbot2022.herokuapp.com/bankBranches?bankID=${bankId}`)
     const data: BranchRecord[] = await response.json()
     if(data.length === 0){
         return []
